@@ -1,4 +1,3 @@
-
 # this code returns a list of movies for each actor
 # along with release year
 
@@ -40,13 +39,14 @@ def findMovies(actor):
             break
 
     # if info not empty
-    if info != {}:
-        if 'actor' in info['filmography']:
-            role = 'actor'
-        elif 'writer' in info['filmography']:
-            role = 'writer'
-        elif 'director' in info['filmography']:
-            role = 'director'
+    if info != {} and 'actor' in info['filmography']:
+
+        role = 'actor'
+        # elif 'writer' in info['filmography']:
+        #     role = 'writer'
+        # elif 'director' in info['filmography']:
+        #     role = 'director'
+        # else:
 
         movie_count = 0
         #  list of movies (j) performed by the actor/director/writer

@@ -23,15 +23,15 @@ movie_data = response.json()
 release_year = movie_data['Year']
 cast = movie_data['Actors'].split(', ')
 director = movie_data['Director']
-plot = movie_data['Plot']
-awards = movie_data['Awards']
+# plot = movie_data['Plot']
+# awards = movie_data['Awards']
 content_type = movie_data['Type']
-ratings = movie_data['Ratings']
+# imdb_score = movie_data['imdbRating']
 
 crew = cast.copy()
 crew.extend(director)
 
-print(*cast)
+print(*crew)
 print()
 
 # printing list of actors
@@ -43,12 +43,24 @@ for actor in cast:
 
 # printing list of actors along with list of movies
 # of each actor
+score_sum = 0
+actor_avg_score = {}
 for i, j in actor_hist.items():
     #  printing actor name
     print(i)
     # printing actor's movies list (p) along with release year (q)
     for p, q in j.items():
         print(p, ':', q)
+        url = "http://www.omdbapi.com/?apikey=" + omdb_api_key + "&t=" + p + "&y=" + str(q) + "&plot=full"
+        response = r.get(url)
+        movie_data = response.json()
+        if movie_data['imdbRating'].isnumeric():
+            score_sum = score_sum + movie_data['imdbRating']
+    print()
+    avg = score_sum // 5
+    print(f'Average rating : {avg}')
+    actor_avg_score.setdefault(i, avg)
     print()
 
-
+for i, j in actor_avg_score.items():
+    print(i, ':', j)

@@ -1,11 +1,6 @@
-d = {}
-actor_hist = {}
-d.setdefault('b', 5)
-print(d)
-actor_hist.setdefault('a', d)
-print(actor_hist)
 
-# {'a': {'b': 5}}
+st = 'N/A'
+print(st.isnumeric())
 
 # from bs4 import BeautifulSoup
 # import requests
