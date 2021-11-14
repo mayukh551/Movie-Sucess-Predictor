@@ -26,15 +26,29 @@ director = movie_data['Director']
 plot = movie_data['Plot']
 awards = movie_data['Awards']
 content_type = movie_data['Type']
-
 ratings = movie_data['Ratings']
 
-print(*cast)
+crew = cast.copy()
+crew.extend(director)
 
+print(*cast)
+print()
+
+# printing list of actors
 for actor in cast:
     print(actor)
     print()
     findMovies(actor)
     print('\n')
 
-print(movies)
+# printing list of actors along with list of movies
+# of each actor
+for i, j in actor_hist.items():
+    #  printing actor name
+    print(i)
+    # printing actor's movies list (p) along with release year (q)
+    for p, q in j.items():
+        print(p, ':', q)
+    print()
+
+

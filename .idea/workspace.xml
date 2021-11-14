@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31479bc7-5e90-428b-8cf4-f9a94d015983" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="31479bc7-5e90-428b-8cf4-f9a94d015983" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -171,12 +168,12 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.exp_Movie_API" />
+      <item itemvalue="Python.imdb_Package" />
       <item itemvalue="Python.main" />
       <item itemvalue="Python.movie_person_api" />
       <item itemvalue="Python.test_code" />
       <item itemvalue="Python.web_scraping" />
-      <item itemvalue="Python.exp_Movie_API" />
-      <item itemvalue="Python.imdb_Package" />
     </list>
     <recent_temporary>
       <list>
@@ -209,5 +206,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
