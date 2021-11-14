@@ -1,7 +1,11 @@
-runtime = "175 min"
-runtime = runtime[:runtime.find('m') - 1]
-print(runtime)
-print(int(runtime) > 75)
+d = {}
+actor_hist = {}
+d.setdefault('b', 5)
+print(d)
+actor_hist.setdefault('a', d)
+print(actor_hist)
+
+# {'a': {'b': 5}}
 
 # from bs4 import BeautifulSoup
 # import requests

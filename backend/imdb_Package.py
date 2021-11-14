@@ -1,5 +1,12 @@
+
+# this code returns a list of movies for each actor
+# along with release year
+
+
 import imdb
 import requests as r
+
+actor_hist = {}
 
 
 def findMovies(actor):
@@ -7,7 +14,7 @@ def findMovies(actor):
     ia = imdb.IMDb()
 
     name = actor
-
+    movies = {}
     # searching the name
     search = ia.search_person(name)
     country = 'India'
@@ -41,12 +48,12 @@ def findMovies(actor):
         elif 'director' in info['filmography']:
             role = 'director'
 
-        movies = {}
         movie_count = 0
-        #  list of movies performed by the actor/director/writer
+        #  list of movies (j) performed by the actor/director/writer
         for j in info['filmography'][role]:
-
             if movie_count == 5:
+                # saving actor name along with movies list
+                actor_hist[actor] = movies
                 return
 
             #  To fetch year of release from omdb api
@@ -61,7 +68,9 @@ def findMovies(actor):
                     if len(data['Year']) == 4 and (2010 < int(data['Year']) < 2021):
                         print(j, end=" ")
                         print(data['Year'])
+                        # saving movie name along with year in movies dictionary
                         movies.setdefault(j, data['Year'])
+                        # counting no. of movies up to max 5
                         movie_count = movie_count + 1
 
     else:
