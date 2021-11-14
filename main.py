@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import requests as r
 import os
 from imdb_Package import *
@@ -38,3 +39,6 @@ for actor in cast:
     print('\n')
 
 print(movies)
+=======
+print("DESZsG")
+>>>>>>> cd80b7e (Create main.py)
