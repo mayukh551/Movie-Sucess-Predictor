@@ -16,7 +16,7 @@ def findMovies(actor):
     movies = {}
     # searching the name
     search = ia.search_person(name)
-    country = 'India'
+    # country = 'India'
 
     # to extract actor detail list
     def extract_person_info(actor_results):
@@ -62,12 +62,13 @@ def findMovies(actor):
             response = r.get(url)
             data = response.json()
             if 'Runtime' in data and actor in data['Actors']:
+                # Filtering movie list with runtime
                 runtime = data['Runtime']
                 runtime = runtime[:runtime.find('m') - 1]
                 if 'Year' in data and ('N' not in runtime) and int(runtime) >= 75:
                     if len(data['Year']) == 4 and (2010 < int(data['Year']) < 2021):
-                        print(j, end=" ")
-                        print(data['Year'])
+                        # print(j, end=" ")
+                        # print(data['Year'])
                         # saving movie name along with year in movies dictionary
                         movies.setdefault(j, data['Year'])
                         # counting no. of movies up to max 5

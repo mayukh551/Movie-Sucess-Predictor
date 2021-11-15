@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imdb_Package.py" beforeDir="false" afterPath="$PROJECT_DIR$/imdb_Package.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie_person_api.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_person_api.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_code.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,10 +183,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test_code" />
-        <item itemvalue="Python.web_scraping" />
         <item itemvalue="Python.imdb_Package" />
         <item itemvalue="Python.movie_person_api" />
+        <item itemvalue="Python.test_code" />
+        <item itemvalue="Python.web_scraping" />
         <item itemvalue="Python.exp_Movie_API" />
       </list>
     </recent_temporary>

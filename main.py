@@ -1,6 +1,7 @@
 import requests as r
 import os
 from imdb_Package import *
+# from test_code import *
 
 # c4779b30
 
@@ -23,42 +24,53 @@ movie_data = response.json()
 release_year = movie_data['Year']
 cast = movie_data['Actors'].split(', ')
 director = movie_data['Director']
+content_type = movie_data['Type']
 # plot = movie_data['Plot']
 # awards = movie_data['Awards']
-content_type = movie_data['Type']
-# imdb_score = movie_data['imdbRating']
+# cast.append(director)
+print(*cast)
 
-crew = cast.copy()
-crew.extend(director)
+#  CODE TO BE TESTED
 
-print(*crew)
-print()
+# cast_list = findCast(movie_name)
+# print(cast_list)
+# cast = []
+# for i in cast_list:
+#     st = i
+#     print(st, end=" ")
+#     cast.append(st)
+# print(cast)
+# cast = cast[:3]
+# print(cast)
+
 
 # printing list of actors
 for actor in cast:
-    print(actor)
-    print()
     findMovies(actor)
-    print('\n')
 
 # printing list of actors along with list of movies
 # of each actor
-score_sum = 0
 actor_avg_score = {}
 for i, j in actor_hist.items():
+    score = []
     #  printing actor name
     print(i)
     # printing actor's movies list (p) along with release year (q)
     for p, q in j.items():
         print(p, ':', q)
-        url = "http://www.omdbapi.com/?apikey=" + omdb_api_key + "&t=" + p + "&y=" + str(q) + "&plot=full"
+        url = "http://www.omdbapi.com/?apikey=" + omdb_api_key + "&t=" + str(p) + "&y=" + str(q) + "&plot=full"
         response = r.get(url)
         movie_data = response.json()
-        if movie_data['imdbRating'].isnumeric():
-            score_sum = score_sum + movie_data['imdbRating']
+        if 'N' not in movie_data['imdbRating']:
+            score.append(float(movie_data['imdbRating']))
     print()
-    avg = score_sum // 5
-    print(f'Average rating : {avg}')
+    # Find the average of best 3 movies
+    score.sort()
+    # Last 3 elements will be highest of all
+    print(score)
+    score_sum = sum(score[2:])
+    avg = score_sum / 3
+    print(f'Average rating of {i} : {avg}')
     actor_avg_score.setdefault(i, avg)
     print()
 
