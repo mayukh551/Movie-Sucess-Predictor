@@ -1,76 +1,76 @@
 import requests as r
 import os
+from imdb_Package import *
+from GetActorsList import *
 
-api_key = os.environ.get('MOVIE_API')
+# c4779b30
 
-movie_name = input('Enter a name : ')
-print()
+# Fetching api keys from different websites
 
-# # &language=en-US
+omdb_api_key = os.environ.get('OMDB_API')
+tmdb_api_key = os.environ.get('MOVIE_API')
+movie_name = input("Enter the movie name : ")
 
-# To achieve movie details and movie ID using the following url
+# From OMDB website to fetch release year,
+# all kinds of ratings,
+# awards,
+# cast adn director and type
 
-url = "https://api.themoviedb.org/3/search/movie?api_key=" + api_key + "&query=" + movie_name + "&page=1&include_adult=false"
-
-response = r.get(url)
-data = response.json()
-movie_details = data['results']
-movie_details = movie_details[0]
-mov_id = movie_details['id']
-
-# to fetch imdb id
-
-url = "https://api.themoviedb.org/3/movie/" + str(mov_id) + "?api_key=" + api_key
+url = "http://www.omdbapi.com/?apikey=" + omdb_api_key + "&t=" + movie_name + "&plot=full"
 
 response = r.get(url)
-data = response.json()
+movie_data = response.json()
 
-imdb_id = data['imdb_id']
-
-# to fetch ratings from diff sources using imdb_id
-#
-# url = "http://www.omdbapi.com/?apikey=c4779b30&i=" + str(imdb_id) + "&plot=full"
-#
-# response = r.get(url)
-# data = response.json()
-#
-# for i, j in data.items():
-#     print(i, ":", j)
-
-# print(data)
-# year = data['Year']
-# runtime = data['Runtime']
-# genre = data['Genre'].split(',')
-# director = data['Director']
-# cast = data['Actors'].split(',')
-# print(year)
-# print(*genre)
-# print(director)
+release_year = movie_data['Year']
+print("Release Of Year", release_year)
+# cast = movie_data['Actors'].split(', ')
+director = movie_data['Director']
+content_type = movie_data['Type']
 # print(*cast)
-# print(data['imdbRating'])
 
-# Movie Details
+#  CODE TO BE TESTED
+#  Fetch List of all actors
+cast_list = findCast(movie_name, release_year)
+if cast_list == 0:
+    print("Program Stopped!")
+else:
+    # print('Cast : \n', *cast_list)
+    # extracting only top five actors
+    cast_list = cast_list[:5]
+    # cast_list.append(director)
+    # printing list of actors
+    for actor in cast_list:
+        findMovies(actor)
 
-# print('Movie Name : ', movie_details['original_title'])
-# print('Description : ')
-# print(movie_details['overview'])
-# print()
-# print("Release date : ", movie_details['release_date'])
-# print("Viewers' vote : ", movie_details['vote_average'])
-#
-#
-# # To fetch Movie cast and crew details
-#
-# url = "https://api.themoviedb.org/3/movie/" + str(mov_id) + "/credits?api_key=" + api_key
-#
-# response = r.get(url)
-# data = response.json()
+    # printing list of actors along with list of movies
+    # of each actor
+    actor_avg_score = {}
+    for i, j in actor_hist.items():
+        score = []
+        #  printing actor name
+        print(i)
+        # printing actor's movies list (p) along with release year (q)
+        for p, q in j.items():
+            print(p, ':', q)
 
+            # Calling OMDB API to fetch imdb ratings
+            # of last 5 movies of each actor
+            url = "http://www.omdbapi.com/?apikey=" + omdb_api_key + "&t=" + str(p) + "&y=" + str(q) + "&plot=full"
+            response = r.get(url)
+            movie_data = response.json()
+            if 'N' not in movie_data['imdbRating']:
+                #  storing imdb score in a list
+                score.append(float(movie_data['imdbRating']))
+        print()
+        # Find the average of best 3 movies
+        score.sort()
+        # Last 3 elements will be highest of all
+        print(score)
+        score_sum = sum(score[2:])
+        avg = score_sum / 3
+        print(f'Average rating of {i} : {avg}')
+        actor_avg_score.setdefault(i, avg)
+        print()
 
-# To find a actor or director details using person_id
-
-# person_id = i['id']
-# url = "https://api.themoviedb.org/3/person/" + str(person_id) + "?api_key=001a39241eb26389e5bcf5f8f4bfa764&language=en-US"
-# response = r.get(url)
-# per_info = response.json()
-# print(per_info['popularity'])
+    for i, j in actor_avg_score.items():
+        print(f'{i} : %.2f' % j)

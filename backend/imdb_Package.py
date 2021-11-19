@@ -1,29 +1,36 @@
-
 # this code returns a list of movies for each actor
 # along with release year
+# in dictionary -> actor_hist
 
 
 import imdb
 import requests as r
 
 actor_hist = {}
+director_hist = {}
 
 
-def findMovies(actor):
+def findMovies(person):
+    print()
+    print("file-2")
+    print(person)
+    print()
+    movies = {}
+    director_movies = {}
     # creating instance of IMDb
     ia = imdb.IMDb()
 
-    name = actor
-    movies = {}
+    name = person
+    # movies = {}
+    # director_movies = {}
     # searching the name
     search = ia.search_person(name)
-    country = 'India'
 
     # to extract actor detail list
     def extract_person_info(actor_results):
         for x, y in actor_results.items():
-            if actor_results['data']['name'] == name:
-                return actor_results['data']
+            # print(actor_results['data']['name'])
+            return actor_results['data']
         return {}
 
     info = {}
@@ -40,20 +47,27 @@ def findMovies(actor):
             break
 
     # if info not empty
+    # if info != {} and 'actor' in info['filmography']:
     if info != {}:
         if 'actor' in info['filmography']:
             role = 'actor'
-        elif 'writer' in info['filmography']:
-            role = 'writer'
+        elif 'actress' in info['filmography']:
+            role = 'actress'
         elif 'director' in info['filmography']:
             role = 'director'
+        elif 'writer' in info['filmography']:
+            role = 'writer'
+        # else:
 
         movie_count = 0
         #  list of movies (j) performed by the actor/director/writer
         for j in info['filmography'][role]:
             if movie_count == 5:
+                if role == 'director':
+                    director_hist[person] = director_movies
                 # saving actor name along with movies list
-                actor_hist[actor] = movies
+                else:
+                    actor_hist[person] = movies
                 return
 
             #  To fetch year of release from omdb api
@@ -61,17 +75,36 @@ def findMovies(actor):
             url = "http://www.omdbapi.com/?apikey=c4779b30&t=" + str(j) + "&plot=full"
             response = r.get(url)
             data = response.json()
-            if 'Runtime' in data and actor in data['Actors']:
+
+            def filter_movies(j, data, role):
+                # Filtering movie list with runtime
                 runtime = data['Runtime']
                 runtime = runtime[:runtime.find('m') - 1]
                 if 'Year' in data and ('N' not in runtime) and int(runtime) >= 75:
-                    if len(data['Year']) == 4 and (2010 < int(data['Year']) < 2021):
-                        print(j, end=" ")
-                        print(data['Year'])
+                    year = data['Year']
+                    if len(year) == 4 and int(year) < 2021:
                         # saving movie name along with year in movies dictionary
-                        movies.setdefault(j, data['Year'])
-                        # counting no. of movies up to max 5
-                        movie_count = movie_count + 1
+                        if role == 'director':
+                            director_movies[j] = year
+                        else:
+                            print(j, year)
+                            movies.setdefault(j, year)
+                        return 1
+                return 0
+
+            if 'Runtime' in data and person in data['Actors']:
+                movie_count = movie_count + filter_movies(j, data, role)
+                print('Movie Count : ', movie_count)
+
+            elif 'Runtime' in data and person in data['Director']:
+                movie_count = movie_count + filter_movies(j, data, role)
+
+        if len(info['filmography'][role]) <= 5:
+            if role == 'director':
+                director_hist[person] = director_movies
+            else:
+                actor_hist[person] = movies
+            return
 
     else:
-        print("Actor Not found!")
+        print(f'{person} Not found!')
