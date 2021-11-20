@@ -1,7 +1,7 @@
 import requests as r
 import os
 from imdb_Package import *
-from movie_person_api import *
+from Get_Actor_List import *
 # from GetActorsList import *
 # c4779b30
 

@@ -21,17 +21,8 @@ def findMovies(person):
     ia = imdb.IMDb()
 
     name = person
-    # movies = {}
-    # director_movies = {}
     # searching the name
     search = ia.search_person(name)
-
-    # to extract actor detail list
-    def extract_person_info(actor_results):
-        for x, y in actor_results.items():
-            # print(actor_results['data']['name'])
-            return actor_results['data']
-        return {}
 
     info = {}
     for i in range(len(search)):
@@ -42,26 +33,33 @@ def findMovies(person):
         actor_results = ia.get_person_filmography(person_id)
 
         # calling a function to fetch all movie list, name, birthplace
-        info = extract_person_info(actor_results)
+        # info = extract_person_info(actor_results)
+        info = actor_results['data']
         if info != {}:
             break
 
     # if info not empty
     # if info != {} and 'actor' in info['filmography']:
     if info != {}:
-        if 'actor' in info['filmography']:
+        film_career = info['filmography']
+        if 'actor' in film_career:
             role = 'actor'
-        elif 'actress' in info['filmography']:
+        elif 'actress' in film_career:
             role = 'actress'
-        elif 'director' in info['filmography']:
+        elif 'director' in film_career:
             role = 'director'
-        elif 'writer' in info['filmography']:
+        elif 'writer' in film_career:
             role = 'writer'
         # else:
-
+        print(role)
         movie_count = 0
+        jobOfPerson = film_career[role]
+        print(len(jobOfPerson))
+
         #  list of movies (j) performed by the actor/director/writer
-        for j in info['filmography'][role]:
+        for j in jobOfPerson:
+            if role == 'director':
+                print(director_movies, 'here1', len(info['filmography'][role]))
             if movie_count == 5:
                 if role == 'director':
                     director_hist[person] = director_movies
@@ -99,7 +97,7 @@ def findMovies(person):
             elif 'Runtime' in data and person in data['Director']:
                 movie_count = movie_count + filter_movies(j, data, role)
 
-        if len(info['filmography'][role]) <= 5:
+        if len(jobOfPerson) <= 5:
             if role == 'director':
                 director_hist[person] = director_movies
             else:
