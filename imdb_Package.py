@@ -58,8 +58,8 @@ def findMovies(person):
 
         #  list of movies (j) performed by the actor/director/writer
         for j in jobOfPerson:
-            if role == 'director':
-                print(director_movies, 'here1', len(info['filmography'][role]))
+            # if role == 'director':
+            # print(director_movies, 'here1', len(info['filmography'][role]))
             if movie_count == 5:
                 if role == 'director':
                     director_hist[person] = director_movies
@@ -83,6 +83,7 @@ def findMovies(person):
                     if len(year) == 4 and int(year) < 2021:
                         # saving movie name along with year in movies dictionary
                         if role == 'director':
+                            # print(j, year)
                             director_movies[j] = year
                         else:
                             print(j, year)
@@ -106,6 +107,12 @@ def findMovies(person):
 
     else:
         print(f'{person} Not found!')
+
+
+findMovies(input())
+for i in director_hist.values():
+    for p, q in i.items():
+        print(p, q)
 
 # this code returns a list of movies for each actor
 # along with release year

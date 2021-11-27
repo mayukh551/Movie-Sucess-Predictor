@@ -1,12 +1,11 @@
 # To fetch actors list from a specific movie
 # using TMDB API
-import time
 
 import requests as r
 
 
 def findCast(movie, year):
-    start = time.time()
+    # start = time.time()
     # print('file-3')
     url = "https://api.themoviedb.org/3/search/movie?api_key=001a39241eb26389e5bcf5f8f4bfa764&page=1&query=" + movie + "&include_adult=false&year=" + str(
         year)
@@ -42,17 +41,15 @@ def findCast(movie, year):
                 c = c + 1
             if c == 5:
                 break
-        end = time.time()
-        print("Time taken by findCast() = ",(end-start))
+        # end = time.time()
+        # print("Time taken by findCast() = ",(end-start))
         return actors
 
     else:
-        end = time.time()
-        print("Time taken by findCast() = ", (end - start))
+        # end = time.time()
+        # print("Time taken by findCast() = ", (end - start))
         print("Movie Not found")
         return ''
-
-
 
 
 # print(*findCast(input('Enter movie name : '), int(input('Enter release year : '))))
