@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31479bc7-5e90-428b-8cf4-f9a94d015983" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Director_Movies_Score.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Director_Movies_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Director_Movies_Score.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Get_Actor_List.py" beforeDir="false" afterPath="$PROJECT_DIR$/Get_Actor_List.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Get_Movie_List.py" beforeDir="false" afterPath="$PROJECT_DIR$/Get_Movie_List.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buttons.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/imdb_Package.py" beforeDir="false" afterPath="$PROJECT_DIR$/imdb_Package.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Get_Cast_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Get_Cast_Score.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movie_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_dataset.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_code.py" afterDir="false" />
@@ -73,6 +71,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Get_Cast_Score" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Personal Projects Py" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Get_Cast_Score.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Get_Movie_List (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Personal Projects Py" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -86,27 +105,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Get_Movie_List.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="imdb_Package" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Personal Projects Py" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/imdb_Package.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -183,18 +181,18 @@
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.Get_Movie_List (1)" />
-      <item itemvalue="Python.imdb_Package" />
       <item itemvalue="Python.movie_dataset" />
       <item itemvalue="Python.Director_Movies_Score" />
       <item itemvalue="Python.test_code" />
+      <item itemvalue="Python.Get_Cast_Score" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.test_code" />
+        <item itemvalue="Python.Get_Cast_Score" />
+        <item itemvalue="Python.movie_dataset" />
         <item itemvalue="Python.Get_Movie_List (1)" />
         <item itemvalue="Python.Director_Movies_Score" />
-        <item itemvalue="Python.movie_dataset" />
-        <item itemvalue="Python.imdb_Package" />
       </list>
     </recent_temporary>
   </component>

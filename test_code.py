@@ -1,6 +1,4 @@
-d = {'a': 1, 'b': 2}
-print(len(d))
-
+print('02' > '03')
 # import requests as r
 #
 # movie = input("Enter an movie name : ")
