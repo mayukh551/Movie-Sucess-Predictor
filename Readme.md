@@ -12,7 +12,7 @@ Using Public API, we fetch:
 - Cast List
 - Director Name
 ```Python
-url = "http://www.omdbapi.com/?apikey=c4779b30&t=" + {Movie_Name} + "&y=" + {Release_Year} + "&plot=short"
+url = "http://www.omdbapi.com/?apikey=" + {api_key} + "&t=" + {Movie_Name} + "&y=" + {Release_Year} + "&plot=short"
 response = requests.get(url)
 movie_data = response.json()
 ```
