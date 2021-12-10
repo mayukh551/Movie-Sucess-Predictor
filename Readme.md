@@ -69,7 +69,8 @@ else:
 The above code is for judging the _**popularity**_ of director :  
 - Popular / Good Director (dp)  
 - Average Director (dok)  
-- Flop Director (dflop)
+- Flop Director (dflop)  
+</br>
 
 [OMDb API](https://www.omdbapi.com/) :  
 
