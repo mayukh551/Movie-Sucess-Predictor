@@ -2,7 +2,7 @@
 Using **Python**, **Public APIs**
 
 <!-- <img src="C:\Tatai\Python files\Personal Projects Py\MovieSucessPredictor_SS.jpeg"> -->
-!(https://github.com/mayukh551/Movie-Sucess-Predictor/blob/mayukh/MovieSucessPredictor_SS.jpeg?raw=true)
+![Movie Success Predictor Desktop Application](https://github.com/mayukh551/Movie-Sucess-Predictor/blob/mayukh/MovieSucessPredictor_SS.jpeg?raw=true)
 
 ### How does it work?
 It asks for movie name from the user along with release year(optional)
