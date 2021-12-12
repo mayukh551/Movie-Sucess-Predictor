@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="31479bc7-5e90-428b-8cf4-f9a94d015983" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Director_Movies_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Director_Movies_Score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Get_Actor_List.py" beforeDir="false" afterPath="$PROJECT_DIR$/Get_Actor_List.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Get_Cast_Score.py" beforeDir="false" afterPath="$PROJECT_DIR$/Get_Cast_Score.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Trial.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Trial.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_code.py" afterDir="false" />
-    </list>
+    <list default="true" id="31479bc7-5e90-428b-8cf4-f9a94d015983" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
