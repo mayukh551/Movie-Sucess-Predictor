@@ -1,5 +1,9 @@
-# To fetch actors list from a specific movie
-# using TMDB API
+"""
+    To fetch actors list from a specific movie
+    Using TMDB API
+
+"""
+
 
 import requests as r
 
@@ -28,6 +32,9 @@ def findCast(movie, year):
         c = 0
         cast = data['cast']
         actors = []
+
+        """     Listing 5 top actors of this movie      """
+
         for actor in cast:
             if actor['known_for_department'] == 'Acting':
                 actors.append(actor['name'])

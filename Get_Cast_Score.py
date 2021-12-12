@@ -1,16 +1,22 @@
 """
 Step 1 -> Get actor name
-Step 2 -> Get last 5 movies name
+Step 2 -> Get last 5 movies name of release years less than rel year of searched movie
 Step 3 -> While listing 5 movies Get one movie, then check if it is a movie and person is the main cast,
                 -> if yes, then fetch imdb rating and store in a list
 
-Step 4 -> Sort score list and extract best 3 scores if possible
-Step 5 -> return its average
+Step 4 -> Sort score list and returns the score list
+
 """
 
 import requests as r
 from Get_Actor_List import *
 from datetime import date
+
+'''
+    A dictionary that stores movie names along with imdb ratings 
+    To avoid repeated api calls to fetch imdb rating for the same movie
+'''
+movie_with_imdb = {}
 
 
 # Filtering one movie at a time by runtime and
@@ -38,7 +44,7 @@ def filter_movies(movie, person):
 #  Fetching a list of movies the actor has ever appeared
 # then it will be sent to filter_movies() to for shortlisting the list
 
-def findmoviesByCast(person):
+def findmoviesByCast(person, searched_movie_year):
     # To store list of imdb ratings from past movies for this actor
     score = []
     # to fetch the person id
@@ -61,7 +67,15 @@ def findmoviesByCast(person):
         data = response.json()
         # creating the movie list of this actor
         c = 0
-        for i in data['results']:
+        lis = data['results']
+        arranged_movies_list = []
+        try:
+            arranged_movies_list = sorted(lis, key=lambda x: x['release_date'], reverse=True)
+        except KeyError:
+            arranged_movies_list = lis
+        # for i in data['results']:
+        for i in arranged_movies_list:
+            # print(i['original_title'])
             if c == 5:
                 break
             if 'release_date' in i:
@@ -69,18 +83,29 @@ def findmoviesByCast(person):
                 yor = i['release_date']
                 rly = yor[:4]
                 today = str(date.today())
-                if '2012' <= rly:
+                # print(searched_movie_year, 'from movie_analysis.py')
+                # if searched_movie_year != '' and rly != '':
+                # <= (int(searched_movie_year) + 1)
+                if str(int(searched_movie_year) - 12) <= rly:
+                    # print(searched_movie_year, rly, end=", ")
                     # print('Condition 2 -> checking lower limit of release year...')
                     # month no                # Day no.
                     if rly <= today[:4] and ((yor[5:7] <= today[5:7]) or (yor[8:] <= today[8:])):
-
                         # Fetch imdb rating
                         # print('Condition 3 -> checking upper limit of release year')
-                        z = filter_movies(i['original_title'], person)
-                        if z != -1:
+                        if i['original_title'] in movie_with_imdb:
+                            print('Same movie performed by another actor')
+                            score.append(movie_with_imdb[i['original_title']])
                             c = c + 1
-                            # print(f'Final condition -> if it is a movie_#{c}')
-                            score.append(z)
+                        else:
+                            z = filter_movies(i['original_title'], person)
+                            if z != -1:
+                                print(i['original_title'], end=", ")
+                                movie_with_imdb.setdefault(i['original_title'], z)
+                                c = c + 1
+                                # print(f'Final condition -> if it is a movie_#{c}')
+                                score.append(z)
+        print()
         print('\n')
         return score
 
@@ -88,9 +113,9 @@ def findmoviesByCast(person):
         print(f'{person} not found!')
 
 
-def main_code(person):
+def main_code(person, searched_movie_year):
     actor = person
-    cast_score = findmoviesByCast(actor)
+    cast_score = findmoviesByCast(actor, searched_movie_year)
     cast_score.sort()
     print(person)
     print(f'Last Movies Performance : {cast_score}')

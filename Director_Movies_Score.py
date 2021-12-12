@@ -13,18 +13,21 @@ def filter_director_movies(movie, director_name):
     details = r.get(url2)
     movie_data = details.json()
     if movie_data['Response'] == 'True':
-        if movie_data['Director'] == director_name:
+        # print('Response Accepted')
+        if (director_name in movie_data['Director']) or (director_name in movie_data['Writer']):
+            # print("Directed by", director_name)
             runtime = movie_data['Runtime']
             runtime = runtime[:runtime.find('m') - 1]
             if ('N' not in runtime) and int(runtime) >= 75:
+                # print('Runtime Accepted')
                 if 'N' not in movie_data['imdbRating']:
+                    # print('IMDBRating achieved')
                     return float(movie_data['imdbRating'])
 
     return -1
 
 
 def getDirectorPastMovie(direc_id, person):
-
     """
         Following Code fetch movie names
         where the director is involved
@@ -46,7 +49,7 @@ def getDirectorPastMovie(direc_id, person):
             filter_director_movies() shortlist the movies 
             By checking if director has directed this movie
         """
-
+        # print(dataOfCrew['results'][i]['original_title'])
         z = filter_director_movies(dataOfCrew['results'][i]['original_title'], person)
         if z != -1:
             score.append(z)
