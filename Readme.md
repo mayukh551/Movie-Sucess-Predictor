@@ -1,10 +1,10 @@
-#Movie-Success-Predictor
+# Movie-Success-Predictor
 Using **Python**, **Public APIs**
 
-<img src="C:\Tatai\Python files\Personal Projects Py\MovieSucessPredictor_SS.jpeg">
+<!-- <img src="C:\Tatai\Python files\Personal Projects Py\MovieSucessPredictor_SS.jpeg"> -->
+![Movie Success Predictor Desktop Application](https://github.com/mayukh551/Movie-Sucess-Predictor/blob/mayukh/MovieSucessPredictor_SS.jpeg?raw=true)
 
-
-###How does it work?
+### How does it work?
 It asks for movie name from the user along with release year(optional)
 
 Using Public API, we fetch:
@@ -12,7 +12,7 @@ Using Public API, we fetch:
 - Cast List
 - Director Name
 ```Python
-url = "http://www.omdbapi.com/?apikey=c4779b30&t=" + {Movie_Name} + "&y=" + {Release_Year} + "&plot=short"
+url = "http://www.omdbapi.com/?apikey=" + {api_key} + "&t=" + {Movie_Name} + "&y=" + {Release_Year} + "&plot=short"
 response = requests.get(url)
 movie_data = response.json()
 ```
@@ -69,9 +69,11 @@ else:
 The above code is for judging the _**popularity**_ of director :  
 - Popular / Good Director (dp)  
 - Average Director (dok)  
-- Flop Director (dflop)
+- Flop Director (dflop)  
+</br>
 
 [OMDb API](https://www.omdbapi.com/) :  
+
 For IMDB Rating, Rotten Tomatoes, Director    
 
 [TMDB](https://developers.themoviedb.org/3/) :  
