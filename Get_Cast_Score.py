@@ -73,24 +73,36 @@ def findmoviesByCast(person, searched_movie_year):
             arranged_movies_list = sorted(lis, key=lambda x: x['release_date'], reverse=True)
         except KeyError:
             arranged_movies_list = lis
-        # for i in data['results']:
+
         for i in arranged_movies_list:
             # print(i['original_title'])
             if c == 5:
                 break
             if 'release_date' in i:
                 # print('Condition 1 -> checking release year...')
-                yor = i['release_date']
-                rly = yor[:4]
-                today = str(date.today())
+                yor = i['release_date'].split('-')
+                rly = yor[0]
                 # print(searched_movie_year, 'from movie_analysis.py')
+                today = str(date.today()).split('-')
+                # print(today, yor)
                 # if searched_movie_year != '' and rly != '':
-                # <= (int(searched_movie_year) + 1)
                 if str(int(searched_movie_year) - 12) <= rly:
                     # print(searched_movie_year, rly, end=", ")
                     # print('Condition 2 -> checking lower limit of release year...')
                     # month no                # Day no.
-                    if rly <= today[:4] and ((yor[5:7] <= today[5:7]) or (yor[8:] <= today[8:])):
+                    """if rly <= today[0] and ((yor[1] <= today[1]) or (yor[2] <= today[2])):"""
+
+                    """
+                        cond3 satisfies that movies searched are movies release before user-entered movie   """
+                    cond3 = False
+                    # for release year less than current year
+                    if yor[0] < today[0]:
+                        cond3 = True
+                    # for release year ==  current year
+                    elif yor[0] == today[0] and ((yor[1] < today[1]) or (yor[2] <= today[2])):
+                        cond3 = True
+
+                    if cond3:
                         # Fetch imdb rating
                         # print('Condition 3 -> checking upper limit of release year')
                         if i['original_title'] in movie_with_imdb:
@@ -105,7 +117,7 @@ def findmoviesByCast(person, searched_movie_year):
                                 c = c + 1
                                 # print(f'Final condition -> if it is a movie_#{c}')
                                 score.append(z)
-        print()
+        # print()
         print('\n')
         return score
 
