@@ -12,10 +12,10 @@ import requests as r
 from Get_Actor_List import *
 from datetime import date
 
-'''
+"""
     A dictionary that stores movie names along with imdb ratings 
     To avoid repeated api calls to fetch imdb rating for the same movie
-'''
+"""
 movie_with_imdb = {}
 
 
