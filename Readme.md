@@ -2,7 +2,7 @@
 Using **Python**, **Public APIs**
 
 <!-- <img src="C:\Tatai\Python files\Personal Projects Py\MovieSucessPredictor_SS.jpeg"> -->
-![Movie Success Predictor Desktop Application](https://github.com/mayukh551/Movie-Sucess-Predictor/blob/mayukh/MovieSucessPredictor_SS.jpeg?raw=true)
+![Movie Success Predictor Desktop Application](https://github.com/mayukh551/Movie-Sucess-Predictor/blob/mayukh/MovieSucessPredictor_SS.jpeg?)
 
 ### How does it work?
 It asks for movie name from the user along with release year(optional)
@@ -74,7 +74,7 @@ The above code is for judging the _**popularity**_ of director :
 
 [OMDb API](https://www.omdbapi.com/) :  
 
-For IMDB Rating, Rotten Tomatoes, Director    
+For IMDB Rating, Rotten Tomatoes, Director Name  
 
 [TMDB](https://developers.themoviedb.org/3/) :  
 - To extract the list of movies performed by an actor / actress

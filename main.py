@@ -13,9 +13,11 @@
 
 import requests as r
 import os
-from Get_Actor_List import *
-from Director_Movies_Score import *
-from Get_Cast_Score import *
+from Movie_funcs import *
+
+
+# def display_message(msg, x, y):
+#     canvas.create_text(x, y, text=msg, font=("Poppins", 20), fill="white")
 
 
 # c4779b30
@@ -41,21 +43,20 @@ def extract_best_movies(ratings):
 def main_file_run(movie_name, y):
     # Fetching api keys from different websites
 
-    omdb_api_key = os.environ.get('OMDB_API')
-    tmdb_api_key = os.environ.get('MOVIE_API')
+    # omdb_api_key = os.environ.get('OMDB_API')
+    # tmdb_api_key = os.environ.get('MOVIE_API')
 
-    '''
-    From OMDB website to fetch release year,
-    all kinds of ratings,
-    awards,
-    cast and director and type'''
+    """
+        From OMDB website to fetch release year,
+        all kinds of ratings,
+        awards,
+        cast and director and type
+    """
 
-    # + omdb_api_key +
-
-    # movie_name = input("Enter the movie name : ")
-    # y = input("Enter the release year: ")
-    print('file-1')
     print(movie_name, y)
+
+    # display_message('Fetching Data...', 630, 250)
+
     url = "http://www.omdbapi.com/?apikey=c4779b30&t=" + movie_name + "&y=" + str(y) + "&plot=short"
     response = r.get(url)
     movie_data = response.json()
@@ -74,17 +75,14 @@ def main_file_run(movie_name, y):
     cast_list = findCast(movie_name, release_year)
     if len(cast_list) == 0:
         print("Program Stopped!")
-        cast_list = movie_data['Actors']
+
     else:
-        score = []
-        actor_score = {}
         # if cast List not empty
-        score_pref = {}
         actor_performance = {}
         print('Cast : ', cast_list)
         for actor in cast_list:
             # returns score list of past movies
-            score = main_code(actor, release_year)
+            score = cast_score_main_code(actor, release_year)
             actor_avg = extract_best_movies(score)
             # storing actor's average score along with no. of movies (MAX : 5)
             actor_performance.setdefault(actor_avg, len(score))
@@ -122,18 +120,24 @@ def main_file_run(movie_name, y):
         # of last 5 movies of a director by passing director name
         scoreOfMovies = director_main_code(director)
 
+        """ Upto above code"""
+
         # scoreOfMovies is score of movies of a director
         # stores the avg of best movies out of 5 or less
         director_avg = extract_best_movies(scoreOfMovies)
         director_avg = director_avg
 
+        """
+            The Following Code -> Grading System
+        """
+
         # best 3 actor chosen out of 5
         p = gd = ok = flop = 0
         for i in best_actor_scores:
-            if 8 <= i:
+            if 7.8 <= i:
                 # p counts no. of good actors
                 p = p + 1
-            elif 7 <= i < 8:
+            elif 7 <= i <= 7.7:
                 gd = gd + 1
             elif 6 <= i < 7:
                 # ok counts no. of average actors
@@ -151,61 +155,39 @@ def main_file_run(movie_name, y):
         else:
             dflop = dflop + 1
 
+        print('Popular Actors : ', p)
+        print('Good Actors : ', gd)
+        print('Average Actors : ', ok)
+        print('Flop actors : ', flop)
         print('Based on cast and director popularity and past movies success')
         print('This movie will be', end=" ")
         if dp == 1:
             # more than 8
-            if p >= 2 and flop == 0:
-                print("Hit")
-                return 'Hit'
+            if p >= 2 and flop == 0 and ok == 0:
+                return 'Super-Hit'
 
             # less than 8 and more than 7
-            elif p == 1 and gd == 2:
-                print('Good')
+            elif gd >= 2 and flop == 0:
+                return 'Hit'
 
-            elif p >= 1 and ok >= 1 and flop == 0:
-                print('Good')
-
-            return 'Good'
+            elif gd >= 1 and ok >= 1 and flop == 0:
+                return 'Hit'
 
         elif dok == 1:
             # less than 7 but more than 6
             if p >= 1 or ok >= 2 or gd >= 2:
-                print('Average')
                 return 'Average'
 
         elif dflop == 1:
             if p >= 1 or ok > 1:
-                print('Below Average')
                 return 'Below Average'
 
         # less than 6 but more than 5
         elif (p >= 1 and dflop == 1) or (ok > 1 and dflop == 1):
-            print('Below Average')
             return 'Below Average'
 
         # less than 5
         else:
-            print('Flop')
             return 'Flop'
 
-# main_file_run(input("Enter the movie name : "),input("Enter the release year: "))
-
-# if p >= 2 and dp == 1:
-#     print("Hit")
-#
-# # less than 8 and more than 7
-# elif p >= 1 and dp == 1 and ok >= 1:
-#     print('Good')
-#
-# # less than 7 but more than 6
-# elif (p >= 1 and dok == 1) or (ok >= 2 and dok == 1):
-#     print('Average')
-#
-# # less than 6 but more than 5
-# elif (p >= 1 and dflop == 1) or (ok > 1 and dflop == 1):
-#     print('Below Average')
-#
-# # less than 5
-# else:
-#     print('Flop')
+# print(main_file_run(input("Enter Movie Name: "), input("Enter release year : ")))

@@ -17,8 +17,10 @@ from datetime import date
 
 
 def findCast(movie, year):
+    # Kitchen
     url = "https://api.themoviedb.org/3/search/movie?api_key=001a39241eb26389e5bcf5f8f4bfa764&page=1&query=" + movie + "&include_adult=false&year=" + str(
         year)
+    # Food served on plate
     response = r.get(url)
     data = response.json()
     movie_data = data['results']
