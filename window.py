@@ -8,7 +8,9 @@ def display(res):
 
 def btn_clicked():
     print("Button Clicked")
+    # Movie Name
     input_mov = entry1.get()
+    # Release Year of Movie
     input_year = entry0.get()
     result = main_file_run(input_mov, input_year)
     print(result)
@@ -33,7 +35,6 @@ background_img = PhotoImage(file=f"background.png")
 background = canvas.create_image(
     402.0, 317.5,
     image=background_img)
-
 
 # canvas.create_text(630, 280, text="Output", font=("Poppins", 20), fill="white")
 
@@ -80,7 +81,6 @@ entry1.place(
     x=63, y=136,
     width=703,
     height=34)
-
 
 window.resizable(False, False)
 window.mainloop()
