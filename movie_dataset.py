@@ -2,93 +2,61 @@
 # last 5 movies performed by an actor or director
 
 from openpyxl import workbook, load_workbook
-from bs4 import BeautifulSoup
-import requests as r
-import time
 
 wb = load_workbook('Trial.xlsx')
 ws = wb.active
-start = time.time()
-movie_name = input("Enter the movie name : ")
-y = input("Enter the release year: ")
-url = "http://www.omdbapi.com/?apikey=c4779b30&t=" + movie_name + "&y=" + y + "&plot=short"
-response = r.get(url)
-movie_data = response.json()
-cast = movie_data['Actors']
-c = 0
-for person in cast:
-    if c == 10:
-        break
-    # person = input()
-    print()
-    url = 'https://api.themoviedb.org/3/search/person?api_key=001a39241eb26389e5bcf5f8f4bfa764&query=' + person + '&language=en-US&page=1&include_adult=false'
-    response = r.get(url)
-    data = response.json()
-    if 'results' in data:
-        cast_data = data['results']
-        person_id = ''
-        for i in cast_data:
-            person_id = i['id']
-            break
-        end = time.time()
-        print(f'Time taken by tmdb api call #1 and retrieving = {end - start}')
-        if person_id != '':
-            start = time.time()
-            url = 'https://api.themoviedb.org/3/person/' + str(
-                person_id) + '?api_key=001a39241eb26389e5bcf5f8f4bfa764&language=en-US'
-            response = r.get(url)
-            data = response.json()
-            # actor_imdb_id = 'nm4043618'
-            actor_imdb_id = data['imdb_id']
-            end = time.time()
-            print(f'Time taken by tmdb api call #2 and retrieving = {end - start}')
-            start = time.time()
-            url = 'https://www.imdb.com/name/' + actor_imdb_id + '/?ref_=fn_al_nm_1'
-            source = r.get(url)
-            if source.status_code == 200:
-                soup = BeautifulSoup(source.text, 'html.parser')
-                l = soup.find('div', class_="filmo-category-section").find_all('div')
-                end = time.time()
-                print(f'Time taken by web scraping and retrieving = {end - start}')
-                t = 0
-                # terms = ['completed', 'post-production', 'pre-production', 'filming']
-                for i in l:
-                    start = time.time()
-                    # print(i)
-                    # print(i.find('span').text[2:-1])
-                    if i.find('span') is not None:
-                        if '2012' < i.find('span').text[2:-1] < '2021':
-                            print(i.find('b').a.text)
-                            c = c + 1
-                            # print()
-                    end = time.time()
-                    t = t + (end - start)
-                print(f'Time taken by for loop = {t}')
-        else:
-            print('Actor Not Found!')
+r = 37
+row = 'A' + str(r)
+# popular_actors = gd_actors = avg_actors = flop_actors = 0
+seven_pointer = {
+    'popular_actors': 0, 'gd_actors': 0, 'avg_actors': 0, 'flop_actors': 0}
 
-# ws['A1'] = 'Movie'
-#
-# url = 'https://www.imdb.com/chart/top'
-# i = 2
-# source = r.get(url)
-# if source.status_code == 200:
-#     print('working\n')
-#     soup = BeautifulSoup(source.text, 'html.parser')
-#     movies = soup.find('tbody', class_="lister-list").find_all('tr')
-#     for movie in movies:
-#         rank = movie.find('td', class_="titleColumn").get_text
-#         name = movie.find('td', class_="titleColumn").a.text
-#         movie_name = 'A' + str(i)
-#         ws[movie_name] = name
-#         i = i + 1
-#         # print(name)
-#
-# wb.save('constituents3.xlsx')
+six_pointer = {
+    'popular_actors': 0, 'gd_actors': 0, 'avg_actors': 0, 'flop_actors': 0}
 
-# movie_name = 'A' + str(2)
-# i = 2
-# while ws[movie_name].value is not None:
-#     print(ws[movie_name].value)
-#     i = i + 1
-#     movie_name = 'A' + str(i)
+count = 0
+
+while ws[row].value is not None:
+    if 7 <= float(ws['C' + str(r)].value) <= 7.7:
+        # print(">=7")
+        # if (int(ws['D' + str(r)].value) + int(ws['E' + str(r)].value) + int(ws['F' + str(r)].value) + int(
+        #         ws['G' + str(r)].value)):
+        seven_pointer['popular_actors'] += int(ws['D' + str(r)].value)
+        seven_pointer['gd_actors'] += int(ws['E' + str(r)].value)
+        seven_pointer['avg_actors'] += int(ws['F' + str(r)].value)
+        seven_pointer['flop_actors'] += int(ws['G' + str(r)].value)
+
+    # elif 6 <= float(ws['C' + str(r)].value) < 7:
+    #     # print(">=6")
+    #     six_pointer['popular_actors'] += int(ws['D' + str(r)].value)
+    #     six_pointer['gd_actors'] += int(ws['E' + str(r)].value)
+    #     six_pointer['avg_actors'] += int(ws['F' + str(r)].value)
+    #     six_pointer['flop_actors'] += int(ws['G' + str(r)].value)
+
+    r = r + 1
+    row = 'A' + str(r)
+    count += 1
+
+print('\nFor Movies : 7.7>= score >=7 out of', count, '\n')
+
+print('Total Popular actors   :   ', seven_pointer["popular_actors"],
+      f' ->  {((seven_pointer["popular_actors"] / count) * 100)}%')
+print('Total good actors      :   ', seven_pointer["gd_actors"],
+      f' ->  {((seven_pointer["gd_actors"] / count) * 100)}%')
+print('Total average actors   :   ', seven_pointer["avg_actors"],
+      f' ->  {((seven_pointer["avg_actors"] / count) * 100)}%')
+print('Total flop actors      :   ', seven_pointer["flop_actors"],
+      f' ->  {((seven_pointer["flop_actors"] / count) * 100)}%')
+
+# print('\nFor Movies : 7> score >=6 out of', count, '\n')
+#
+# print('Total Popular actors   :   ', six_pointer["popular_actors"],
+#       f'  ->   {((six_pointer["popular_actors"] / count) * 100)}%')
+# print('Total good actors      :   ', six_pointer["gd_actors"],
+#       f' ->  {((six_pointer["gd_actors"] / count) * 100)}%')
+# print('Total average actors   :   ', six_pointer["avg_actors"],
+#       f' ->  {((six_pointer["avg_actors"] / count) * 100)}%')
+# print('Total flop actors      :   ', six_pointer["flop_actors"],
+#       f' ->  {((six_pointer["flop_actors"] / count) * 100)}%')
+
+wb.save('Trial.xlsx')

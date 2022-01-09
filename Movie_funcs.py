@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 import requests as r
 from datetime import date
 
@@ -14,6 +15,27 @@ from datetime import date
     Using TMDB API
 
 """
+
+
+def find_Cast_From_Imdb(imdb_id):
+    imdb_url = 'https://www.imdb.com/title/' + str(imdb_id) + '/'
+    source = r.get(imdb_url)
+    cast_list = []
+    # print(source.text)
+    # print('\n\n')
+    if source.status_code == 200:
+        # print('working\n')
+        soup = BeautifulSoup(source.text, 'html.parser')
+        cast_data = soup.find('div', class_="title-cast__grid").find_all('div', class_="StyledComponents__CastItemWrapper-sc-y9ygcu-7")
+        for actor in cast_data:
+            cast_list.append(actor.find('div', class_="StyledComponents__CastItemSummary-sc-y9ygcu-9 hLoKtW").find('a').text)
+            if len(cast_list) == 5:
+                return cast_list
+
+        return cast_list
+
+    else:
+        return None
 
 
 def findCast(movie, year):
