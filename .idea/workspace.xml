@@ -3,12 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="31479bc7-5e90-428b-8cf4-f9a94d015983" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App_Font.py" beforeDir="false" afterPath="$PROJECT_DIR$/App_Font.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Movie_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/Movie_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Movie_funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Movie_funcs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Trial.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Trial.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/background.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movie_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/movie_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_code.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_code.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/window.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +35,16 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Movie_funcs.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/App_Font.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Movie_analysis.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/test_code.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/movie_dataset.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/window.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/imdb_scraping.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1zkzAyWx6dTVGpkHyOsxNz4TwYX" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -48,7 +59,7 @@
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.window">
     <configuration name="App_Font" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Personal Projects Py" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -187,11 +198,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.App_Font" />
-        <item itemvalue="Python.test_code" />
         <item itemvalue="Python.window" />
         <item itemvalue="Python.movie_dataset" />
         <item itemvalue="Python.Movie_analysis" />
+        <item itemvalue="Python.App_Font" />
+        <item itemvalue="Python.test_code" />
       </list>
     </recent_temporary>
   </component>

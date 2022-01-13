@@ -1,37 +1,105 @@
-from tkinter import *
-from tkinter import font
+"""
+    Possible Combinations of actors in a movie
+    Of categories : Popular, good, average, flop
 
-root = Tk()
-root.title('Font Families')
-fonts = list(font.families())
-fonts.sort()
+    Possible combinations with Popular
 
+        popular and good -> 2 cases ->  1. p > gd     2. gd > p
+        popular and ok   -> 2 cases ->  1. p > ok     2. ok > p
+        popular and flop -> 2 cases ->  1. p > flop   2. flop > p
 
-def populate(frame):
-    """Put in the fonts"""
-    listnumber = 1
-    for item in fonts:
-        label = "listlabel" + str(listnumber)
-        label = Label(frame, text=item, font=(item, 16)).pack()
-        listnumber += 1
+    Possible combinations with Good
 
+        good and ok   -> 2 cases ->  1. p > ok     2. ok > p
+        good and flop -> 2 cases ->  1. p > flop     2. flop > p
 
-def onFrameConfigure(canvas):
-    """    Reset the scroll region to encompass the inner frame    """
-    canvas.configure(scrollregion=canvas.bbox("all"))
+    Possible combinations with ok
+
+        ok and flop
 
 
-canvas = Canvas(root, borderwidth=0, background="#ffffff")
-frame = Frame(canvas, background="#ffffff")
-vsb = Scrollbar(root, orient="vertical", command=canvas.yview)
-canvas.configure(yscrollcommand=vsb.set)
+"""
 
-vsb.pack(side="right", fill="y")
-canvas.pack(side="left", fill="both", expand=True)
-canvas.create_window((4, 4), window=frame, anchor="nw")
+p = gd = ok = flop = 0
 
-frame.bind("<Configure>", lambda event, canvas=canvas: onFrameConfigure(canvas))
 
-populate(frame)
+def check():
+    """ Possible combinations with Popular  """
 
-root.mainloop()
+    if p == 3:
+        return 'msg'
+
+
+def check_if_hit(cg):
+    if (p + gd) == 3 and gd != 0 and p != 0:
+        """ popular and good -> 
+            2 cases ->  1. p > gd 
+                        2. gd > p       """
+        if p > gd:
+            return 'msg'
+
+        elif gd > p:
+            return 'msg'
+
+    elif (p + ok) == 3 and ok != 0 and p != 0:
+        """ popular and ok -> 
+            2 cases ->   1. p > ok
+                        2. ok > p   """
+        if p > ok:
+            return 'msg'
+
+        elif ok > p:
+            return 'msg'
+
+    elif (p + flop) == 3 and flop != 0 and p != 0:
+        """ popular and flop ->
+            1 case ->   p > flop       """
+
+        if p > flop:
+            return 'msg'
+
+    elif gd == 3:
+        return ''
+
+
+def check_if_hit_Or_Average():
+    if (gd + ok) == 3 and gd != 0 and ok != 0:
+        """ Possible combinations with Good   """
+        if gd > ok:
+            return ''
+
+        elif ok > gd:
+            return ''
+
+    elif (gd + flop) == 3 and gd != 0 and flop != 0:
+        if gd > flop:
+            return ''
+
+        elif flop > gd:
+            return ''
+
+
+def check_if_Avg_or_Below():
+    if (ok + flop) == 3 and ok != 0 and flop != 0:
+        if ok == 3:
+            return ''
+
+        if ok > flop:
+            return ''
+
+
+dp = dok = dflop = 0
+movie_success_category = []
+if dp == 1:
+    movie_success_category = ['Super-Hit', 'Hit', 'Average']
+    if p == 3:
+        return 'Super-Hit'
+
+    elif p != 0:
+        return check_if_hit(movie_success_category):
+
+        elif p == 0:
+        return check_if_hit_Or_Average(movie_success_category)
+
+if dok == 1:
+    movie_success_category = ['Hit', 'Average', 'Below Average', 'flop']

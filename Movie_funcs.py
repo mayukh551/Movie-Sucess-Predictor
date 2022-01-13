@@ -15,7 +15,7 @@ from datetime import date
     Using TMDB API
 
 """
-
+# 609af948
 
 def find_Cast_From_Imdb(imdb_id):
     imdb_url = 'https://www.imdb.com/title/' + str(imdb_id) + '/'
@@ -104,7 +104,7 @@ movie_with_imdb = {}
 # Filtering one movie at a time by runtime and
 # if the actor is the main cast in the movie
 def filter_movies(movie, person):
-    url = "http://www.omdbapi.com/?apikey=c4779b30&t=" + movie + "&plot=full"
+    url = "http://www.omdbapi.com/?apikey=609af948&t=" + movie + "&plot=full"
     response = r.get(url)
     data = response.json()
     if data['Response'] == 'True':
@@ -237,7 +237,7 @@ def filter_director_movies(movie, director_name):
                     -> if IMDB rating present, stores it in a score list of past movies by Director
     """
 
-    url2 = "http://www.omdbapi.com/?apikey=c4779b30&t=" + movie + "&plot=short"
+    url2 = "http://www.omdbapi.com/?apikey=609af948&t=" + movie + "&plot=short"
     details = r.get(url2)
     movie_data = details.json()
     if movie_data['Response'] == 'True':

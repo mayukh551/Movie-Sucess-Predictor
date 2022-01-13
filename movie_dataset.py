@@ -7,15 +7,45 @@ wb = load_workbook('Trial.xlsx')
 ws = wb.active
 r = 37
 row = 'A' + str(r)
-# popular_actors = gd_actors = avg_actors = flop_actors = 0
+popular_actors = gd_actors = avg_actors = flop_actors = 0
 seven_pointer = {
     'popular_actors': 0, 'gd_actors': 0, 'avg_actors': 0, 'flop_actors': 0}
 
 six_pointer = {
     'popular_actors': 0, 'gd_actors': 0, 'avg_actors': 0, 'flop_actors': 0}
 
-count = 0
+# director_performance = {
+#     'popular_directors': 0, 'ok_directors': 0, 'flop_directors': 0
+# }
 
+count = 0
+dp = dok = dflop = 0
+while ws[row].value is not None:
+    if ws['H' + str(r)].value == 1:
+        dp += 1
+
+    elif ws['I' + str(r)].value == 1:
+        dok += 1
+
+    elif ws['J' + str(r)].value == 1:
+        dflop += 1
+
+    if ws['H' + str(r)].value == 0 and ws['I' + str(r)].value == 0 and ws['J' + str(r)].value == 0:
+        print("Director Not found; Row no. : ", r)
+        count = count - 1
+
+    count += 1
+    r = r + 1
+    row = 'A' + str(r)
+
+print('For average Movies')
+print(f'Popular Director : {dp} out of {count}       -> {(dp / count) * 100}%')
+print(f'Average Director : {dok} out of {count}      -> {(dok / count) * 100}%')
+print(f'Flop Director    : {dflop} out of {count}       -> {(dflop / count) * 100}%')
+print('\n')
+r = 37
+row = 'A' + str(r)
+count = 0
 while ws[row].value is not None:
     if 7 <= float(ws['C' + str(r)].value) <= 7.7:
         # print(">=7")

@@ -15,14 +15,9 @@ import requests as r
 import os
 from Movie_funcs import *
 from datetime import date
-from window import *
 
 
-# def display_message(msg, x, y):
-#     canvas.create_text(x, y, text=msg, font=("Poppins", 20), fill="white")
-
-
-# c4779b30
+# 609af948
 def extract_best_movies(ratings):
     s = 0
     average = 0.0
@@ -39,6 +34,7 @@ def extract_best_movies(ratings):
         average = sum(ratings) / 2
     elif no_of_scores == 1:
         average = sum(ratings)
+
     return average
 
 
@@ -58,22 +54,34 @@ def main_file_run(movie_name, y):
         cast and director and type
     """
 
-    # display_message('Fetching Data...', 630, 250)
+    # If user does not give the name of movie or any input
+    if movie_name == "":
+        return 'Invalid Input!'
 
-    url = "http://www.omdbapi.com/?apikey=c4779b30&t=" + movie_name + "&y=" + str(y) + "&plot=short"
+    url = "http://www.omdbapi.com/?apikey=609af948&t=" + movie_name + "&y=" + str(y) + "&plot=short"
     response = r.get(url)
     movie_data = response.json()
     if movie_data['Response'] == 'False':
         return movie_data['Error']
 
+    # The movie has already been released with imdb rating available
+    if 'N/A' not in movie_data['imdbRating']:
+        if len(movie_data['Year']) > 4:
+            return 'Not a Movie!'
+        else:
+            return movie_data['imdbRating']
+
     release_year = ''
 
     if y == '':
         release_year = movie_data['Year']
+        print(release_year)
+        if len(release_year) > 4:
+            return 'Not a Movie! If possible enter Release Year'
         print("Release Of Year", release_year)
 
     elif y != '' and not y.isnumeric():
-        return 'Invalid Release Year'
+        print('Invalid Release Year')
 
     else:
         release_year = y
@@ -93,17 +101,15 @@ def main_file_run(movie_name, y):
             print('From IMDB Website')
             cast_list = find_Cast_From_Imdb(movie_data['imdbID'])
             if not cast_list:
-                print("Program Stopped!")
                 return 'Movie Not Found!'
         else:
-            print("Program Stopped!")
             return 'Movie Not Found!'
 
     # if cast List not empty
     actor_performance = {}
     print('Cast : ', cast_list)
     for actor in cast_list:
-        # returns score list of past movies
+        # print( score list of past movies)
         score = cast_score_main_code(actor, release_year)
         actor_avg = extract_best_movies(score)
         # storing actor's average score along with no. of movies (MAX : 5)
@@ -181,7 +187,7 @@ def main_file_run(movie_name, y):
 
     dp = dok = dflop = 0
     i = director_avg
-    if 7 <= i:
+    if 7 < i:
         dp = dp + 1
     elif 6 <= i < 7:
         dok = dok + 1
@@ -194,43 +200,212 @@ def main_file_run(movie_name, y):
     print('Flop actors : ', flop)
     print('Based on cast and director popularity and past movies success')
     print('This movie will be', end=" ")
+    # if dp == 1:
+    #     # more than 8
+    #     if p >= 2 and (p + gd) == 3:
+    #         return 'Super-Hit'
+    #
+    #     # less than 8 and more than 7
+    #     elif gd >= 2 and (gd + p) == 3 or (p > ok and (p + ok) == 3):
+    #         """ If only popular and good actors present
+    #                     OR
+    #             only popular and average actors where popular > average  """
+    #
+    #         return 'Hit'
+    #
+    #     elif gd > ok and (gd + ok) == 3:
+    #         """     Only good and ok actors     """
+    #
+    #         return 'Hit'
+    #
+    # elif dok == 1:
+    #     # less than 7 but more than 6
+    #     if gd == 3 or (p + gd == 3):
+    #         return 'Above Average'
+    #
+    #     if (ok + gd) == 3 or (ok >= 1 and (p + gd + ok) == 3):
+    #         return 'Average'
+    #
+    #     if ok == 3:
+    #         return 'Below Average'
+    #
+    # elif dflop == 1:
+    #     if p >= 1 or ok > 1:
+    #         return 'Below Average'
+    #
+    # # less than 6 but more than 5
+    # elif (p >= 1 and dflop == 1) or (ok > 1 and dflop == 1):
+    #     return 'Below Average'
+    #
+    # # less than 5
+    # else:
+    #     return 'Flop'
+
+    """
+        ****************************************************
+        
+    For good directors, possible conditions      """
+
     if dp == 1:
-        # more than 8
-        if p >= 2 and flop == 0 and ok == 0:
+        if p == 3:
             return 'Super-Hit'
 
-        # less than 8 and more than 7
-        elif gd >= 2 and flop == 0:
+        elif (p + gd) == 3 and gd != 0 and p != 0:
+            """ popular and good -> 
+                2 cases ->  1. p > gd 
+                            2. gd > p       """
+            if p > gd:
+                return 'Hit'
+
+            elif gd > p:
+                return 'Hit'
+
+        elif (p + ok) == 3 and ok != 0 and p != 0:
+            """ popular and ok -> 
+                2 cases ->   1. p > ok
+                            2. ok > p   """
+            if p > ok:
+                return 'Hit'
+
+            elif ok > p:
+                return 'Above Average'
+
+        elif (p + flop) == 3 and flop != 0 and p != 0:
+            """ popular and flop ->
+                1 case ->   p > flop       """
+
+            if p > flop:
+                return 'Above Average'
+
+        elif gd == 3:
             return 'Hit'
 
-        elif gd >= 1 and ok >= 1 and flop == 0:
+        elif (gd + ok) == 3 and gd != 0 and ok != 0:
+            """ Possible combinations with Good   """
+            if gd > ok:
+                return 'Hit'
+
+            elif ok > gd:
+                return 'Average'
+
+        elif (gd + flop) == 3 and gd != 0 and flop != 0:
+            if gd > flop:
+                return 'Above Average'
+
+            elif flop > gd:
+                return 'Below Average'
+
+    """
+           ****************************************************
+
+       For average directors, possible conditions      """
+
+    if dok == 1:
+        if p == 3:
             return 'Hit'
 
-    elif dok == 1:
-        # less than 7 but more than 6
-        if gd == 3 or (p + gd == 3):
+        if (p + gd) == 3 and gd != 0 and p != 0:
+            """ popular and good -> 
+                2 cases ->  1. p > gd 
+                            2. gd > p       """
+            if p > gd:
+                return 'Above Average'
+
+            elif gd > p:
+                return 'Above Average'
+
+        elif (p + ok) == 3 and ok != 0 and p != 0:
+            """ popular and ok -> 
+                2 cases ->   1. p > ok
+                            2. ok > p   """
+            if p > ok:
+                return 'Above Average'
+
+            elif ok > p:
+                return 'Average'
+
+        elif (p + flop) == 3 and flop != 0 and p != 0:
+            """ popular and flop ->
+                1 case ->   p > flop       """
+
+            if p > flop:
+                return 'Average'
+
+        # without popular actors
+
+        elif gd == 3:
             return 'Above Average'
 
-        if (ok + gd) == 3:
+        if (gd + ok) == 3 and gd != 0 and ok != 0:
+            """ Possible combinations with Good   """
+            if gd > ok:
+                return 'Above Average'
+
+            elif ok > gd:
+                return 'Average'
+
+        elif (gd + flop) == 3 and gd != 0 and flop != 0:
+            if gd > flop:
+                return 'Below Average'
+
+            elif flop > gd:
+                return 'Flop'
+
+    """*************************************************************
+    
+    For Flop directors, all possible combinations
+    """
+
+    if dflop == 1:
+
+        if p == 3:
+            return 'Above Average'
+
+        if (p + gd) == 3 and gd != 0 and p != 0:
+            """ popular and good -> 
+                2 cases ->  1. p > gd 
+                            2. gd > p       """
+            if p > gd:
+                return 'Average'
+
+            elif gd > p:
+                return 'Average'
+
+        elif (p + ok) == 3 and ok != 0 and p != 0:
+            """ popular and ok -> 
+                2 cases ->   1. p > ok
+                            2. ok > p   """
+            if p > ok:
+                return 'Below Average'
+
+            elif ok > p:
+                return 'Below Average'
+
+        elif (p + flop) == 3 and flop != 0 and p != 0:
+            """ popular and flop ->
+                1 case ->   p > flop       """
+
+            if p > flop:
+                return 'Flop'
+
+        # without popular actors
+
+        elif gd == 3:
             return 'Average'
 
-        if ok >= 1 and (p + gd + ok) == 3:
-            return 'Average'
+        if (gd + ok) == 3 and gd != 0 and ok != 0:
+            """ Possible combinations with Good   """
+            if gd > ok:
+                return 'Average'
 
-        if ok == 3:
-            return 'Below Average'
+            elif ok > gd:
+                return 'Average'
 
-    elif dflop == 1:
-        if p >= 1 or ok > 1:
-            return 'Below Average'
+        elif (gd + flop) == 3 and gd != 0 and flop != 0:
+            if gd > flop:
+                return 'Below Average'
 
-    # less than 6 but more than 5
-    elif (p >= 1 and dflop == 1) or (ok > 1 and dflop == 1):
-        return 'Below Average'
+            elif flop > gd:
+                return 'Flop'
 
-    # less than 5
-    else:
-        return 'Flop'
-
-
-print(main_file_run(input("Enter Movie Name: "), input("Enter release year : ")))
+# print(main_file_run(input("Enter Movie Name: "), input("Enter release year : ")))
