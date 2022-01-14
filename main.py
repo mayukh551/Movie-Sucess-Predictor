@@ -86,10 +86,14 @@ def main_file_run(movie_name, y):
     else:
         release_year = y
 
+    """ After all test cases validation,
+        Further data extraction begins 
+    """
+
     director = movie_data['Director']
-    # print(director)
 
     movie_name = movie_data['Title']
+
     print(movie_name, y)
 
     #  Fetch List of all actors
@@ -108,6 +112,7 @@ def main_file_run(movie_name, y):
     # if cast List not empty
     actor_performance = {}
     print('Cast : ', cast_list)
+    print()
     for actor in cast_list:
         # print( score list of past movies)
         score = cast_score_main_code(actor, release_year)

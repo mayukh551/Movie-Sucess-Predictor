@@ -15,6 +15,8 @@ from datetime import date
     Using TMDB API
 
 """
+
+
 # 609af948
 
 def find_Cast_From_Imdb(imdb_id):
@@ -26,9 +28,11 @@ def find_Cast_From_Imdb(imdb_id):
     if source.status_code == 200:
         # print('working\n')
         soup = BeautifulSoup(source.text, 'html.parser')
-        cast_data = soup.find('div', class_="title-cast__grid").find_all('div', class_="StyledComponents__CastItemWrapper-sc-y9ygcu-7")
+        cast_data = soup.find('div', class_="title-cast__grid").find_all('div',
+                                                                         class_="StyledComponents__CastItemWrapper-sc-y9ygcu-7")
         for actor in cast_data:
-            cast_list.append(actor.find('div', class_="StyledComponents__CastItemSummary-sc-y9ygcu-9 hLoKtW").find('a').text)
+            cast_list.append(
+                actor.find('div', class_="StyledComponents__CastItemSummary-sc-y9ygcu-9 hLoKtW").find('a').text)
             if len(cast_list) == 5:
                 return cast_list
 
@@ -196,13 +200,13 @@ def findmoviesByCast(person, searched_movie_year):
                         else:
                             z = filter_movies(i['original_title'], person)
                             if z != -1:
-                                print(i['original_title'], end=", ")
+                                print(i['original_title'])
                                 movie_with_imdb.setdefault(i['original_title'], z)
                                 c = c + 1
                                 # print(f'Final condition -> if it is a movie_#{c}')
                                 score.append(z)
-        # print()
-        print('\n')
+        print()
+        # print('\n')
         return score
 
     else:
@@ -211,10 +215,14 @@ def findmoviesByCast(person, searched_movie_year):
 
 def cast_score_main_code(person, searched_movie_year):
     actor = person
+    print('Actor/Actress : ', person)
+    print()
+    print('Movie performed by', person, ':')
     cast_score = findmoviesByCast(actor, searched_movie_year)
     cast_score.sort()
-    print(person)
-    print(f'Last Movies Performance : {cast_score}')
+    # print(person)
+    print(f'Last Movies Performance of {person} : {cast_score}')
+    print('\n')
     return cast_score
 
 
