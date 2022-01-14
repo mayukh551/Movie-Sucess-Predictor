@@ -215,6 +215,7 @@ def findmoviesByCast(person, searched_movie_year):
 
 def cast_score_main_code(person, searched_movie_year):
     actor = person
+    print('*******************************\n')
     print('Actor/Actress : ', person)
     print()
     print('Movie performed by', person, ':')
