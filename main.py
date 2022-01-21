@@ -14,6 +14,7 @@
 import requests as r
 import os
 from Movie_funcs import *
+# from imdb_scraping import *
 from datetime import date
 
 
@@ -114,9 +115,9 @@ def main_file_run(movie_name, y):
     print('Cast : ', cast_list)
     print()
     for actor in cast_list:
-        # print( score list of past movies)
         score = cast_score_main_code(actor, release_year)
         actor_avg = extract_best_movies(score)
+
         # storing actor's average score along with no. of movies (MAX : 5)
         actor_performance.setdefault(actor_avg, len(score))
 
@@ -412,5 +413,6 @@ def main_file_run(movie_name, y):
 
             elif flop > gd:
                 return 'Flop'
+
 
 # print(main_file_run(input("Enter Movie Name: "), input("Enter release year : ")))
