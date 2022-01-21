@@ -298,7 +298,7 @@ def getDirectorPastMovie(direc_id, person):
 
 
 def director_main_code(person):
-    """      To fetch Director ID     """
+    """   To fetch Director ID     """
 
     url = 'https://api.themoviedb.org/3/search/person?api_key=001a39241eb26389e5bcf5f8f4bfa764&query=' + person + '&language=en-US&page=1&include_adult=false'
     response = r.get(url)
