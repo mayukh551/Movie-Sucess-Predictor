@@ -57,6 +57,10 @@ def main_file_run(movie_name, y):
     if movie_name == "":
         return 'Invalid Input!'
 
+    # if user has entered released year
+    if y != '' and not y.isnumeric():
+        return 'Invalid Release Year'
+
     url = "http://www.omdbapi.com/?apikey=609af948&t=" + movie_name + "&y=" + str(y) + "&plot=short"
     response = r.get(url)
     # print(type(response))
@@ -82,10 +86,6 @@ def main_file_run(movie_name, y):
         if len(release_year) > 4:
             return 'Not a Movie!'
         print("Release Of Year", release_year)
-
-    # if user has entered released year
-    elif y != '' and not y.isnumeric():
-        print('Invalid Release Year')
 
     else:
         release_year = y
@@ -430,4 +430,4 @@ def main_file_run(movie_name, y):
             return 'Flop'
 
 
-print(main_file_run(input("Enter Movie Name: "), input("Enter release year : ")))
+# print(main_file_run(input("Enter Movie Name: "), input("Enter release year : ")))
