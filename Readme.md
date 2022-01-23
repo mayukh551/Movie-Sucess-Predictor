@@ -2,7 +2,7 @@
 Using **Python**, **Public APIs** and **Web-Scraping**
 
 <!-- <img src="C:\Tatai\Python files\Personal Projects Py\project_SS.png"> -->
-![Movie Success Predictor Desktop Application](https://github.com/mayukh551/Movie-Sucess-Predictor/blob/mayukh/project_SS.png?)
+![Movie Success Predictor Desktop Application](https://github.com/mayukh551/Movie-Sucess-Predictor/blob/master/project_SS.png?)
 
 ### How does it work?
 It asks for movie name from the user along with release year(optional)
