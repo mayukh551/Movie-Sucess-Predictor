@@ -5,7 +5,7 @@
 - Rounak Hazra
 - Abesh Biswas
 
-###**Python Libraries** used for making this project :
+### **Python Libraries** used for making this project :
 - BeautifulSoap
 - requests
 - PIL (Python Imaging Library)
@@ -13,7 +13,7 @@
 
 
 <!-- <img src="C:\Users\MAYUKH\Desktop\project_SS.png"> -->
-![Movie Success Predictor Desktop Application](https://github.com/mayukh551/Movie-Sucess-Predictor/blob/master/project_SS.png?)
+![Movie Success Predictor Desktop Application](https://github.com/mayukh551/Movie-Sucess-Predictor/blob/main/project_SS.png?)
 
 ### How does it work?
 It asks for movie name from the user along with release year (optional)
